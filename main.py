@@ -14,7 +14,7 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
 
 # connection with mongodb instance
-conn = MongoClient('mongodb+srv://NoorulNisa:Tgfe5JmMr5qUAJkI@cluster0.y7gmhsr.mongodb.net/')
+conn = MongoClient('mongodb+srv://NoorulNisa:Tgfe5JmMr5qUAJkI@cluster0.y7gmhsr.mongodb.net')
 
 # @app.get("/")
 # def root():
@@ -30,6 +30,9 @@ def read_profile(first_name: str, last_name: str):
 
 @app.get("/", response_class=HTMLResponse)
 async def read_temp(request: Request):
+    docs = conn.testdb.note_app.find({})
+    for doc in docs:
+        print(doc)
     return templates.TemplateResponse("index.html",{"request": request})
 
 
