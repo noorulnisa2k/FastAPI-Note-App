@@ -31,8 +31,14 @@ def read_profile(first_name: str, last_name: str):
 @app.get("/", response_class=HTMLResponse)
 async def read_temp(request: Request):
     docs = conn.testdb.note_app.find({})
+    data = []
     for doc in docs:
-        print(doc)
-    return templates.TemplateResponse("index.html",{"request": request})
+        data.append({
+            "id":doc['_id'],
+            "note":doc['note'],
+            "date":doc['createdAt']
+        })
+    print(data[0])
+    return templates.TemplateResponse("index.html",{"request": request, "data":data})
 
 
