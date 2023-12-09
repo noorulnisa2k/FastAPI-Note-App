@@ -3,5 +3,5 @@ from datetime import date
 
 class Note(BaseModel):
     todo_title: str
-    todo_checkbox: bool
-    created_at: date
+    todo_checkbox: bool | None = None
+    created_at: date = date.today()

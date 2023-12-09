@@ -9,18 +9,20 @@
   <body>
     <div class="mt-5 container">
       <h3 class="text-center">What is your main focus for today</h3>
-      <form class="" method="post" novalidate>
+      <form action="/" method="post" novalidate>
         <div class="row justify-content-center">
           <div class="my-3 col-6">
-            <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="">
-            <datalist id="datalistOptions">
-              <option value="San Francisco">
-            </datalist>
+            <input class="form-control" list="datalistOptions" id="exampleDataList" name="todo_title" placeholder="">
+          </div>
+        </div>
+        <div class="row justify-content-center">
+          <div class="my-1 col-6">
+            <input type="checkbox" class="form-check-input" id="exampleCheck1" name="todo-checkbox" style="display:none"/>
           </div>
         </div>
         <div class="row justify-content-center">
           <div class="col-2">
-            <button class="btn btn-primary" type="submit">Submit form</button>
+            <button class="btn btn-primary" type="submit">Add Note</button>
           </div>
         </div>
       </form>
@@ -28,10 +30,14 @@
       <div class="container my-3 p-5">
         <ul class="list-group list-group-flush">
           {% for item in data %}
-          <li class="list-group-item d-flex justify-content-between align-items-center">
-            {{item.note}}
-            <span class="">{{item.date}}</span>
-          </li>
+            {% if data is defined %}
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                {{item.note}}
+                <span class="">{{item.date.strftime("%d-%m-%Y")}}</span>
+              </li>
+            {% else %}
+              No notes to display
+            {% endif %}
           {% endfor %}
         </ul>
       </div>
